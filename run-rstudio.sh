@@ -27,7 +27,7 @@ done
 # DOCKER
 docker stop $CONTAINER_NAME 2>/dev/null
 
-docker run --rm -d --name $CONTAINER_NAME -v $_path:/home/rstudio -p 8787:8787 egonzalf/r-inla:rstudio
+docker run --rm -d --name $CONTAINER_NAME -v $_path:/home/rstudio -p 8787:8787 egonzalf/rstudio-inla
 
 echo "rstudio:$PASSWORD" | docker exec -i $CONTAINER_NAME chpasswd
 
