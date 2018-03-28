@@ -1,7 +1,9 @@
-#FROM r-base:latest
 FROM rocker/rstudio:latest
 
-#RUN apt-get update && apt-get -y install -t unstable
+# OPENBLAS IS DEFINED AS ALTERNATIVE TO BLAS, SHOULD INCREASE PERFORMANCE
+ENV LD_LIBRARY_PATH="/etc/alternatives/:$LD_LIBRARY_PATH" \
+    LIBRARY_PATH="/etc/alternatives/:$LIBRARY_PATH"
+
 RUN apt-get update && apt-get -y install \
         build-essential \
         gcc g++ gfortran \
