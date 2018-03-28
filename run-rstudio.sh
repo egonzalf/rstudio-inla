@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# VARIABLES
+IMAGE="egonzalf/rstudio-inla" # image based on rocker/rstudio
 CONTAINER_NAME=${INLA_CONTAINER_NAME:-inla-rstudio}
 
 # MODIFY DEFAULT PASSWORD
@@ -21,13 +23,13 @@ done
 while [ ! -d "$_path" ]; do
 	echo "Type the path you like to use as working directory in RStudio (blank will use current path):"
 	read _path
-	[ -z $_path ] && _path=$PWD 
-done	
+	[ -z $_path ] && _path=$PWD
+done
 
 # DOCKER
 docker stop $CONTAINER_NAME 2>/dev/null
 
-docker run --rm -d --name $CONTAINER_NAME -v $_path:/home/rstudio -p 8787:8787 egonzalf/rstudio-inla
+docker run --rm -d --name $CONTAINER_NAME -v $_path:/home/rstudio -p 8787:8787 $IMAGE
 
 echo "rstudio:$PASSWORD" | docker exec -i $CONTAINER_NAME chpasswd
 
