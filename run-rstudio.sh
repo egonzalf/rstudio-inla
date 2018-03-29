@@ -9,16 +9,8 @@ LOCAL_PORT="" # Define an port number to listen, defaults to 8787
 # MODIFY DEFAULT PASSWORD
 unset PASSWORD;
 while [ -z $PASSWORD ]; do
-	echo "Please enter a new password for user 'rstudio': (if you made a mistake, press CTRL+c)"
-	while IFS= read -r -s -n1 pass; do
-		if [[ -z $pass ]]; then
-			echo
-			break
-		else
-			echo -n '*'
-			PASSWORD+=$pass
-		fi
-	done
+	echo "Please enter a new password for user 'rstudio': (WARNING: it will be printed on screen at the end.)"
+	read -s PASSWORD
 done
 
 # VOLUME MOUNT PATH
@@ -45,6 +37,8 @@ echo "================================================="
 echo "RStudio is running on:"
 echo "   http://$IP:8787/ "
 echo "   http://localhost:8787/ "
+echo "username:rstudio"
+echo "password:$PASSWORD"
 echo ""
 echo "to stop RStudio type: docker stop $CONTAINER_NAME"
 echo "================================================="
