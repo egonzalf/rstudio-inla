@@ -21,7 +21,7 @@ while [ ! -d "$_path" ]; do
 done
 
 # 
-LOCAL_IP=${LOCAL_IP:-0.0.0.0}
+#LOCAL_IP=${LOCAL_IP:-0.0.0.0}
 LOCAL_PORT=${LOCAL_PORT:-8787}
 # DOCKER
 # If running, stop it
