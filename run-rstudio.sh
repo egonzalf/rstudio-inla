@@ -34,7 +34,7 @@ echo "rstudio:$PASSWORD" | docker exec -i $CONTAINER_NAME chpasswd
 
 # SUMMARY
 IP=$(ip route get 8.8.8.8 | awk 'NR==1 {print $NF}')
-IP=${LOCAL_IP:-0.0.0.0}
+IP=${LOCAL_IP:-$IP}
 IP=${IP:-0.0.0.0}
 echo "================================================="
 echo "RStudio is running on:"
