@@ -21,9 +21,9 @@ while [ ! -d "$_path" ]; do
 done
 
 # DOCKER
-docker stop $CONTAINER_NAME 2>/dev/null
-
-docker run --rm -d --name $CONTAINER_NAME -v $_path:/home/rstudio -p 8787:8787 $IMAGE
+# If running, stop it
+_status=`docker ps -f name=$CONTAINER_NAME --format "{{.Status}}" | wc -l`
+[ $_status -gt 0 ] && docker stop $CONTAINER_NAME
 
 echo "Starting Docker container..."
 docker run --rm -d --name $CONTAINER_NAME -v $_path:/home/rstudio -p ${LOCAL_IP:-0.0.0.0}:${LOCAL_PORT:-8787}:8787 $IMAGE
