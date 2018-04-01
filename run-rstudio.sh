@@ -41,7 +41,7 @@ _arg_testing=off
 
 print_help ()
 {
-    printf "%s\n" "<The general help message of my script>"
+    printf "%s\n" "Run Docker container based on RStudio"
     printf 'Usage: %s [--image <arg>] [--port <arg>] [--ip <arg>] [--name <arg>] [--(no-)testing] [-h|--help]\n' "$0"
     printf "\t%s\n" "-h,--help: Prints help"
 }
