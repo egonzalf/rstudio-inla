@@ -7,7 +7,7 @@ ARG INLA_REPO='stable'
 ENV LD_LIBRARY_PATH="/etc/alternatives/:$LD_LIBRARY_PATH" \
     LIBRARY_PATH="/etc/alternatives/:$LIBRARY_PATH"
 
-RUN apt-get update && apt-get -y install \
+RUN apt-get update && apt-get -y install --no-install-recommends \
         build-essential \
         gcc g++ gfortran \
         libfreetype6-dev \
