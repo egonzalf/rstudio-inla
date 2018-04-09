@@ -31,3 +31,5 @@ RUN Rscript -e "install.packages('INLA', repos=c('https://cloud.r-project.org/',
     Rscript -e "options(repos = c(getOption('repos'), INLA='https://inla.r-inla-download.org/R/$INLA_REPO'))" && \
     Rscript -e "update.packages(ask=FALSE)" && \
     rm -rf /tmp/*
+
+LABEL maintainer="Eduardo Gonzalez Fisher"
