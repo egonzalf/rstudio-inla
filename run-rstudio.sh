@@ -33,7 +33,7 @@ begins_with_short_option()
 
 
 # THE DEFAULTS INITIALIZATION - OPTIONALS
-_arg_image="egonzalf/rstudio-inla" # image based on rocker/rstudio
+_arg_image="egonzalf/inla-stable-rstudio" # image based on rocker/rstudio
 _arg_port=8787
 _arg_ip=0.0.0.0
 _arg_name=inla_rstudio
@@ -152,7 +152,7 @@ done
 
 # Testing image
 if [ "$_arg_testing" == "on" ]; then
-    IMAGE="${IMAGE%%:*}:testing"
+    IMAGE="egonzalf/inla-testing-rstudio:latest"
 fi
 
 
