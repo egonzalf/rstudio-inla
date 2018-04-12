@@ -25,6 +25,7 @@ RUN Rscript -e "install.packages('shiny')" && \
 
 # Define the version/repo of INLA to use. Choose either: 'stable' or 'testing'
 ARG INLA_REPO='stable'
+ARG TIMESTAMP
 
 # Install INLA
 RUN Rscript -e "install.packages('INLA', repos=c('https://cloud.r-project.org/', INLA='https://inla.r-inla-download.org/R/$INLA_REPO'), dep=TRUE)" && \
