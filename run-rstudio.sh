@@ -162,6 +162,8 @@ _status=`docker ps -f name=$CONTAINER_NAME --format "{{.Status}}" | wc -l`
 [ $_status -gt 0 ] && docker stop $CONTAINER_NAME
 
 set -e
+echo "Pulling latest image..."
+docker pull $IMAGE
 echo "Starting Docker container..."
 docker run --rm -d --name $CONTAINER_NAME -v $WORKDIR:/home/rstudio -p $LOCAL_IP:$LOCAL_PORT:8787 $IMAGE sh -c "usermod -u $UID rstudio; /init"
 echo "rstudio:$PASSWORD" | docker exec -i $CONTAINER_NAME chpasswd
