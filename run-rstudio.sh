@@ -43,11 +43,11 @@ print_help ()
 {
     printf "%s\n" "Run Docker container based on RStudio"
     printf 'Usage: %s [--image <arg>] [--port <arg>] [--ip <arg>] [--name <arg>] [--(no-)testing] [-h|--help]\n' "$0"
-    printf "\t%s\n" "--image: Docker image to use. (Defaults to egonzalf/rstudio-inla)"
+    printf "\t%s\n" "--image: Docker image to use. (Defaults to egonzalf/inla-stable-rstudio)"
     printf "\t%s\n" "--port: TCP port for Rstudio. (Defaults to 8787)"
     printf "\t%s\n" "--ip: IP address to attach the port to. (Defaults to 0.0.0.0)"
     printf "\t%s\n" "--name: Name for the Docker container. (Defaults to inla-rstudio)"
-    printf "\t%s\n" "--testing: Use the 'testing' tag for image egonzalf/rstudio-inla"
+    printf "\t%s\n" "--testing: Use the 'testing' image egonzalf/inla-testing-rstudio"
     printf "\t%s\n" "-h,--help: Prints help"
 }
 
