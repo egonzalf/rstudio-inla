@@ -6,6 +6,7 @@
 # ARG_OPTIONAL_SINGLE([ip])
 # ARG_OPTIONAL_SINGLE([name])
 # ARG_OPTIONAL_BOOLEAN([testing])
+# ARG_OPTIONAL_BOOLEAN([pull])
 # ARG_HELP([<The general help message of my script>])
 # ARGBASH_GO()
 # needed because of Argbash --> m4_ignore([
@@ -38,6 +39,7 @@ _arg_port=8787
 _arg_ip=0.0.0.0
 _arg_name=inla_rstudio
 _arg_testing=off
+_arg_pull=off
 
 print_help ()
 {
@@ -48,6 +50,7 @@ print_help ()
     printf "\t%s\n" "--ip: IP address to attach the port to. (Defaults to 0.0.0.0)"
     printf "\t%s\n" "--name: Name for the Docker container. (Defaults to inla-rstudio)"
     printf "\t%s\n" "--testing: Use the 'testing' image egonzalf/inla-testing-rstudio"
+    printf "\t%s\n" "--pull: Pull latest version of the docker image"
     printf "\t%s\n" "-h,--help: Prints help"
 }
 
@@ -92,6 +95,10 @@ parse_commandline ()
             --no-testing|--testing)
                 _arg_testing="on"
                 test "${1:0:5}" = "--no-" && _arg_testing="off"
+                ;;
+            --no-pull|--pull)
+                _arg_pull="on"
+                test "${1:0:5}" = "--no-" && _arg_pull="off"
                 ;;
             -h|--help)
                 print_help
@@ -162,8 +169,10 @@ _status=`docker ps -f name=$CONTAINER_NAME --format "{{.Status}}" | wc -l`
 [ $_status -gt 0 ] && docker stop $CONTAINER_NAME
 
 set -e
-echo "Pulling latest image..."
-docker pull $IMAGE
+if [ "$_arg_pull" == "on" ]; then
+    echo "Pulling latest image..."
+    docker pull $IMAGE
+fi
 echo "Starting Docker container..."
 docker run --rm -d --name $CONTAINER_NAME -v $WORKDIR:/home/rstudio -p $LOCAL_IP:$LOCAL_PORT:8787 $IMAGE sh -c "usermod -u $UID rstudio; /init"
 echo "rstudio:$PASSWORD" | docker exec -i $CONTAINER_NAME chpasswd
