@@ -174,8 +174,7 @@ if [ "$_arg_pull" == "on" ]; then
     docker pull $IMAGE
 fi
 echo "Starting Docker container..."
-docker run --rm -d --name $CONTAINER_NAME -v $WORKDIR:/home/rstudio -p $LOCAL_IP:$LOCAL_PORT:8787 $IMAGE sh -c "usermod -u $UID rstudio; /init"
-echo "rstudio:$PASSWORD" | docker exec -i $CONTAINER_NAME chpasswd
+docker run --rm -d --name $CONTAINER_NAME -v $WORKDIR:/home/rstudio -p $LOCAL_IP:$LOCAL_PORT:8787 -e PASSWORD="$PASSWORD" -e USERID=$UID $IMAGE
 
 # SUMMARY
 if [ "0.0.0.0" == "$LOCAL_IP" ]; then

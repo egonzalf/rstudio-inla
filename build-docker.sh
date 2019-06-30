@@ -19,7 +19,7 @@ if [ $last -gt $prev ]; then
     echo "Building $REPO"
     tagdate=$(date -d now +%Y%m%d)
 #    docker rmi $IMAGE:latest
-    docker build --build-arg INLA_REPO="$REPO" --build-arg TIMESTAMP=$last  -t $IMAGE:latest .
+    docker build --pull=true --build-arg INLA_REPO="$REPO" --build-arg TIMESTAMP=$last  -t $IMAGE:latest .
     docker tag $IMAGE:latest $IMAGE:$tagdate
     docker push $IMAGE:$tagdate
     docker push $IMAGE:latest
